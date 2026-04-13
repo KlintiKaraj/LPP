@@ -1,4 +1,10 @@
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/KlintiKaraj/LPP/main/doc/L%2B%2B.png" width="180"/>
+
 # LPP (Lua++)
+
+</div>
 
 LPP 1.0  
 Copyright (C) 2024-2025 Klinti Karaj, Albania
