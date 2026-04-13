@@ -7,10 +7,72 @@ setlocal enabledelayedexpansion
 set SCRIPT_PATH=%~dp0
 set SRC_PATH=%SCRIPT_PATH%src
 set BIN_PATH=%SCRIPT_PATH%bin
+set LOG_FILE=%SCRIPT_PATH%build.log
+
+echo Build Log > "%LOG_FILE%"
+echo Date: %date% %time% >> "%LOG_FILE%"
+echo. >> "%LOG_FILE%"
+
+echo Checking for existing build artifacts...
+echo Checking for existing build artifacts... >> "%LOG_FILE%"
+
+set SHOULD_BUILD=0
+
+REM Check if executables exist
+if exist "%BIN_PATH%\lpp.exe" (
+    echo Found: %BIN_PATH%\lpp.exe
+    echo Found: %BIN_PATH%\lpp.exe >> "%LOG_FILE%"
+    set SHOULD_BUILD=1
+)
+if exist "%BIN_PATH%\lppac.exe" (
+    echo Found: %BIN_PATH%\lppac.exe
+    echo Found: %BIN_PATH%\lppac.exe >> "%LOG_FILE%"
+    set SHOULD_BUILD=1
+)
+
+REM Check for .o files in src directory
+cd /d "%SRC_PATH%"
+for %%f in (*.o) do (
+    echo Found: %%f
+    echo Found: %%f >> "%LOG_FILE%"
+    set SHOULD_BUILD=1
+    goto :found_o_files
+)
+:found_o_files
+
+cd /d "%SCRIPT_PATH%"
+
+if %SHOULD_BUILD%==1 (
+    echo.
+    set /p REBUILD="Build artifacts found. Do you want to rebuild? (Y/N): "
+    echo User input: %REBUILD% >> "%LOG_FILE%"
+    if /i not "%REBUILD%"=="Y" (
+        echo Build canceled.
+        echo Build canceled. >> "%LOG_FILE%"
+        exit /b 0
+    )
+    echo.
+    echo Removing old executables...
+    echo Removing old executables... >> "%LOG_FILE%"
+    if exist "%BIN_PATH%\lpp.exe" (
+        del "%BIN_PATH%\lpp.exe"
+        echo Deleted: %BIN_PATH%\lpp.exe
+        echo Deleted: %BIN_PATH%\lpp.exe >> "%LOG_FILE%"
+    )
+    if exist "%BIN_PATH%\lppac.exe" (
+        del "%BIN_PATH%\lppac.exe"
+        echo Deleted: %BIN_PATH%\lppac.exe
+        echo Deleted: %BIN_PATH%\lppac.exe >> "%LOG_FILE%"
+    )
+    echo.
+    echo Proceeding with rebuild...
+    echo Proceeding with rebuild... >> "%LOG_FILE%"
+)
 
 echo Building LPP (Lua++)...
 echo Source: %SRC_PATH%
 echo Output: %BIN_PATH%
+echo Building LPP (Lua++)... >> "%LOG_FILE%"
 
 if not exist "%BIN_PATH%" mkdir "%BIN_PATH%"
 

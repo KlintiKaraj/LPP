@@ -11,6 +11,10 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             line-height: 1.6;
@@ -18,86 +22,96 @@
             background: #f5f5f5;
         }
 
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+            max-width: 900px;
         }
 
-        header h1 {
-            font-size: 2.5rem;
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #1e1e1e;
+            color: white;
+            padding: 2rem 0;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .sidebar-header {
+            text-align: center;
+            padding: 0 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar-header img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .sidebar-header h1 {
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
 
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .sidebar-header p {
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        nav {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        nav ul {
+        .sidebar-nav ul {
             list-style: none;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
+            padding: 0;
         }
 
-        nav button {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
+        .sidebar-nav li {
+            padding: 0;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: #ccc;
+            text-decoration: none;
             transition: background 0.3s;
+            border-left: 3px solid transparent;
         }
 
-        nav button:hover {
-            background: #5568d3;
+        .sidebar-nav a:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
         }
 
-        nav button.active {
-            background: #764ba2;
+        .sidebar-nav a.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-left-color: #666;
+            color: white;
+            font-weight: bold;
         }
 
         .section {
-            display: none;
             background: white;
             padding: 2rem;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .section.active {
-            display: block;
+            margin-bottom: 2rem;
+            scroll-margin-top: 2rem;
         }
 
         .section h2 {
-            color: #667eea;
+            color: #333;
             margin-bottom: 1rem;
             font-size: 1.8rem;
-            border-bottom: 2px solid #667eea;
+            border-bottom: 2px solid #ddd;
             padding-bottom: 0.5rem;
         }
 
         .section h3 {
-            color: #764ba2;
+            color: #555;
             margin: 1.5rem 0 1rem 0;
             font-size: 1.4rem;
         }
@@ -145,12 +159,31 @@
 
         .badge {
             display: inline-block;
-            background: #667eea;
+            background: #333;
             color: white;
             padding: 0.2rem 0.5rem;
             border-radius: 3px;
             font-size: 0.8rem;
             margin-right: 0.5rem;
+        }
+
+        .changelog-entry {
+            border-left: 3px solid #333;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .changelog-version {
+            font-weight: bold;
+            color: #333;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .changelog-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
         }
 
         footer {
@@ -161,16 +194,12 @@
         }
 
         @media (max-width: 768px) {
-            header h1 {
-                font-size: 2rem;
+            .sidebar {
+                width: 200px;
             }
 
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .container {
+            .main-content {
+                margin-left: 200px;
                 padding: 1rem;
             }
 
@@ -181,23 +210,26 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>LPP Documentation</h1>
-        <p>Lua++ - A Modern Scripting Language Built on Lua</p>
-    </header>
-
-    <div class="container">
-        <nav>
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <img src="https://raw.githubusercontent.com/KlintiKaraj/LPP/main/doc/L%2B%2B.png" alt="LPP Logo">
+            <h1>LPP 1.1</h1>
+            <p>Lua++ Documentation</p>
+        </div>
+        <nav class="sidebar-nav">
             <ul>
-                <li><button onclick="showSection('core')" class="active">Core Identity</button></li>
-                <li><button onclick="showSection('installation')">Installation</button></li>
-                <li><button onclick="showSection('learn')">Learn</button></li>
-                <li><button onclick="showSection('philosophy')">Design Philosophy</button></li>
-                <li><button onclick="showSection('copyright')">Copyright</button></li>
+                <li><a href="#core" class="active">Core Identity</a></li>
+                <li><a href="#installation">Installation</a></li>
+                <li><a href="#learn">Learn</a></li>
+                <li><a href="#philosophy">Design Philosophy</a></li>
+                <li><a href="#changelog">Changelog</a></li>
+                <li><a href="#copyright">Copyright</a></li>
             </ul>
         </nav>
+    </div>
 
-        <div id="core" class="section active">
+    <div class="main-content">
+        <div id="core" class="section">
             <h2>Core Identity</h2>
             
             <h3>What is LPP?</h3>
@@ -503,17 +535,53 @@ if file.exists("path/to/file.txt") then
 endb</code></pre>
             
             <h4>OS Functions</h4>
-            <p>Enhanced operating system interaction:</p>
-            <pre><code>local os = require("os")
+            <p>Enhanced operating system interaction via <code>os_pp</code> library:</p>
+            <pre><code>local os = require("os_pp")
 
--- Execute system command
-local result = os.execute("ls -la")
+-- Get current time
+local time_val = os.time()
+print(time_val)
+
+-- Get date as table
+local date_tbl = os.date()
+print(date_tbl.year, date_tbl.month, date_tbl.day)
+
+-- Get platform information
+local platform = os.platform()
+local arch = os.arch()
+print("Platform:", platform)
+print("Architecture:", arch)
+
+-- Get process ID
+local pid = os.pid()
+print("PID:", pid)
+
+-- Get current working directory
+local cwd = os.cwd()
+print("CWD:", cwd)
 
 -- Get environment variable
 local path = os.getenv("PATH")
+print("PATH:", path)
 
--- Get current directory
-local cwd = os.getcwd()</code></pre>
+-- Set environment variable
+os.setenv("MY_VAR", "value")
+
+-- Unset environment variable
+os.unsetenv("MY_VAR")
+
+-- Sleep for 1 second
+os.sleep(1)
+
+-- Get clock time
+local clock1 = os.clock()
+-- do some work
+local clock2 = os.clock()
+print("Elapsed:", clock2 - clock1)
+
+-- Execute system command
+local exit_code = os.run("ls -la")
+print("Exit code:", exit_code)</code></pre>
         </div>
 
         <div id="philosophy" class="section">
@@ -560,6 +628,35 @@ local cwd = os.getcwd()</code></pre>
             </ul>
         </div>
 
+        <div id="changelog" class="section">
+            <h2>Changelog</h2>
+            
+            <div class="changelog-entry">
+                <div class="changelog-version">Version 1.1</div>
+                <div class="changelog-date">April 2025</div>
+                <ul>
+                    <li>Added HTTP client library with GET, POST, and unified request API</li>
+                    <li>Added extended file handling utilities (read, write, exists, size, mkdir, list, remove, append, move, copy, info, isfile, isdir, join, basename, dirname, absolute, rmdir, removedir, rename)</li>
+                    <li>Added enhanced OS library (time, date, difftime, clock, sleep, getenv, setenv, unsetenv, platform, arch, hostname, pid, cwd, chdir, run, exit)</li>
+                    <li>Improved error handling and API consistency across all libraries</li>
+                    <li>Updated documentation with new library examples</li>
+                    <li>Fixed array parsing issues in standard library functions</li>
+                </ul>
+            </div>
+            
+            <div class="changelog-entry">
+                <div class="changelog-version">Version 1.0</div>
+                <div class="changelog-date">December 2024</div>
+                <ul>
+                    <li>Initial release of LPP</li>
+                    <li>Based on Lua 5.3</li>
+                    <li>Added <code>endb</code> keyword for improved code readability</li>
+                    <li>Core Lua standard libraries included</li>
+                    <li>Cross-platform support for Windows, Linux, and macOS</li>
+                </ul>
+            </div>
+        </div>
+
         <div id="copyright" class="section">
             <h2>Copyright / License</h2>
             
@@ -595,46 +692,55 @@ SOFTWARE.</code></pre>
             <h3>Acknowledgments</h3>
             <p>LPP is built upon the excellent Lua programming language created by the Lua team at PUC-Rio. We acknowledge their foundational work in creating a lightweight, efficient, and elegant scripting language.</p>
         </div>
+
+        <footer>
+            <p>LPP Documentation &copy; 2024-2025 Klinti Karaj</p>
+        </footer>
     </div>
 
-    <footer>
-        <p>LPP Documentation &copy; 2024-2025 funnyfreak228</p>
-    </footer>
-
     <script>
-        function showSection(sectionId) {
-            // Hide all sections
+        // Scroll spy functionality
+        function updateActiveNavLink() {
             const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.sidebar-nav a');
+            
+            let currentSection = '';
+            
             sections.forEach(section => {
-                section.classList.remove('active');
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (window.scrollY >= (sectionTop - 100)) {
+                    currentSection = section.getAttribute('id');
+                }
             });
-
-            // Remove active class from all buttons
-            const buttons = document.querySelectorAll('nav button');
-            buttons.forEach(button => {
-                button.classList.remove('active');
+            
+            if (currentSection === '') {
+                currentSection = sections[0].getAttribute('id');
+            }
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
             });
-
-            // Show selected section
-            document.getElementById(sectionId).classList.add('active');
-
-            // Add active class to clicked button
-            event.target.classList.add('active');
         }
-
+        
+        // Update active link on scroll
+        window.addEventListener('scroll', updateActiveNavLink);
+        
+        // Update active link on load
+        window.addEventListener('DOMContentLoaded', updateActiveNavLink);
+        
         // Handle URL hash for direct linking
         window.addEventListener('DOMContentLoaded', function() {
-            const hash = window.location.hash.substring(1);
+            const hash = window.location.hash;
             if (hash) {
-                showSection(hash);
-                // Update button states
-                const buttons = document.querySelectorAll('nav button');
-                buttons.forEach(button => {
-                    button.classList.remove('active');
-                    if (button.getAttribute('onclick').includes(hash)) {
-                        button.classList.add('active');
-                    }
-                });
+                const target = document.querySelector(hash);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
             }
         });
     </script>
