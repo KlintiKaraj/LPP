@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LPP Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        nav {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        nav button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        nav button:hover {
+            background: #5568d3;
+        }
+
+        nav button.active {
+            background: #764ba2;
+        }
+
+        .section {
+            display: none;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.5rem;
+        }
+
+        .section h3 {
+            color: #764ba2;
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.4rem;
+        }
+
+        .section h4 {
+            color: #555;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+        }
+
+        .section ul {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section li {
+            margin-bottom: 0.5rem;
+        }
+
+        pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        code {
+            background: #f0f0f0;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>LPP Documentation</h1>
+        <p>Lua++ - A Modern Scripting Language Built on Lua</p>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul>
+                <li><button onclick="showSection('core')" class="active">Core Identity</button></li>
+                <li><button onclick="showSection('installation')">Installation</button></li>
+                <li><button onclick="showSection('learn')">Learn</button></li>
+                <li><button onclick="showSection('philosophy')">Design Philosophy</button></li>
+                <li><button onclick="showSection('copyright')">Copyright</button></li>
+            </ul>
+        </nav>
+
+        <div id="core" class="section active">
+            <h2>Core Identity</h2>
+            
+            <h3>What is LPP?</h3>
+            <p><strong>LPP</strong> (LPP++) is a modern scripting language built on top of the Lua runtime. It extends Lua's capabilities with enhanced standard libraries while maintaining full compatibility with Lua's syntax and semantics.</p>
+            
+            <p>LPP is not a new interpreter from scratch—it is a modified Lua-based runtime that adds practical functionality for modern scripting needs. It keeps Lua's lightweight, fast, and embeddable nature while providing developers with ready-to-use tools for common tasks.</p>
+            
+            <h3>Key Features</h3>
+            <ul>
+                <li><span class="badge">HTTP</span> Built-in HTTP client with GET, POST, and unified request API</li>
+                <li><span class="badge">File</span> Extended file handling utilities</li>
+                <li><span class="badge">OS</span> Enhanced operating system interaction tools</li>
+                <li><span class="badge">Syntax</span> Modern syntax improvements including <code>endb</code> (end block) keyword</li>
+                <li><span class="badge">Cross-Platform</span> Native support for Windows, Linux, and macOS</li>
+                <li><span class="badge">Production</span> Structured error handling, timeouts, and robust API design</li>
+            </ul>
+            
+            <h3>Vision and Goals</h3>
+            <p>LPP aims to provide a scripting language that feels familiar to Lua developers while offering the tools needed for real-world applications. The philosophy is simple: extend, don't replace. By building on Lua's proven foundation, LPP delivers a stable, fast, and developer-friendly language for automation, scripting, and application development.</p>
+        </div>
+
+        <div id="installation" class="section">
+            <h2>Installation</h2>
+            
+            <h3>Prerequisites</h3>
+            <ul>
+                <li><strong>GCC</strong> (MinGW on Windows) or compatible C compiler</li>
+                <li><strong>Make</strong> (for Linux/macOS builds)</li>
+                <li>Basic build tools for your platform</li>
+            </ul>
+            
+            <h3>Building from Source</h3>
+            
+            <h4>Windows</h4>
+            <pre><code># Clone the repository
+git clone https://github.com/KlintiKaraj/LPP.git
+cd lpp
+
+# Build using the provided batch script
+build.bat
+
+# Install to PATH (run as Administrator)
+install.ps1</code></pre>
+            
+            <h4>Linux</h4>
+            <pre><code># Clone the repository
+git clone https://github.com/KlintiKaraj/LPP.git
+cd lpp/src
+
+# Build for Linux
+make linux
+
+# Install to system PATH
+sudo ln -s ../bin/lpp /usr/local/bin/lpp</code></pre>
+            
+            <h4>macOS</h4>
+            <pre><code># Clone the repository
+git clone https://github.com/KlintiKaraj/LPP.git
+cd lpp/src
+
+# Build for macOS
+make macosx
+
+# Install to system PATH
+sudo ln -s ../bin/lpp /usr/local/bin/lpp</code></pre>
+            
+            <h3>Running LPP</h3>
+            <p>After installation, you can run LPP scripts from the command line:</p>
+            <pre><code>lpp your_script.lpp</code></pre>
+            
+            <p>Or start an interactive REPL:</p>
+            <pre><code>lpp</code></pre>
+            
+            <h3>First Example</h3>
+            <p>Create a file named <code>hello.lpp</code>:</p>
+            <pre><code>print("Hello from LPP")</code></pre>
+            
+            <p>Run it:</p>
+            <pre><code>lpp hello.lpp</code></pre>
+            
+            <p>Output:</p>
+            <pre><code>Hello from LPP</code></pre>
+        </div>
+
+        <div id="learn" class="section">
+            <h2>Learn LPP</h2>
+            
+            <h3>🧠 Basics</h3>
+            
+            <h4>Print Output</h4>
+            <p>The <code>print()</code> function outputs text to the console:</p>
+            <pre><code>print("Hello, World!")
+print("The answer is", 42)</code></pre>
+            
+            <h4>Variables</h4>
+            <p>Variables are dynamically typed and do not require declaration:</p>
+            <pre><code>local name = "Alice"
+local age = 25
+local is_active = true
+
+print(name, age, is_active)</code></pre>
+            
+            <h4>Data Types</h4>
+            <p>LPP supports all Lua data types:</p>
+            <pre><code>-- Numbers
+local x = 10
+local y = 3.14
+
+-- Strings
+local text = "Hello"
+
+-- Booleans
+local flag = true
+
+-- Tables (arrays/dictionaries)
+local arr = {1, 2, 3}
+local dict = {key = "value"}
+
+-- Nil (absence of value)
+local empty = nil</code></pre>
+            
+            <h4>If Statements</h4>
+            <p>Use <code>then</code> and <code>endb</code> for conditional blocks:</p>
+            <pre><code>local x = 10
+
+if x > 5 then
+    print("big number")
+endb
+
+if x < 5 then
+    print("small number")
+else
+    print("medium number")
+endb
+
+if x == 10 then
+    print("exactly ten")
+elseif x == 20 then
+    print("exactly twenty")
+else
+    print("something else")
+endb</code></pre>
+            
+            <h4>Loops</h4>
+            <p><strong>While loop:</strong></p>
+            <pre><code>local i = 1
+while i <= 5 do
+    print(i)
+    i = i + 1
+endb</code></pre>
+            
+            <p><strong>For loop:</strong></p>
+            <pre><code>for i = 1, 5 do
+    print(i)
+endb
+
+-- Iterating over tables
+local fruits = {"apple", "banana", "cherry"}
+for i, fruit in ipairs(fruits) do
+    print(i, fruit)
+endb</code></pre>
+            
+            <p><strong>Repeat until:</strong></p>
+            <pre><code>local i = 1
+repeat
+    print(i)
+    i = i + 1
+until i > 5</code></pre>
+            
+            <h3>⚙️ Intermediate</h3>
+            
+            <h4>Functions</h4>
+            <p>Define functions using the <code>function</code> keyword and <code>endb</code>:</p>
+            <pre><code>-- Basic function
+function greet(name)
+    print("Hello, " .. name)
+endb
+
+greet("World")
+
+-- Function with return value
+function add(a, b)
+    return a + b
+endb
+
+local result = add(5, 3)
+print(result)  -- 8
+
+-- Anonymous functions
+local multiply = function(a, b)
+    return a * b
+endb
+
+print(multiply(4, 3))  -- 12</code></pre>
+            
+            <h4>Tables / Objects</h4>
+            <p>Tables are the primary data structure in LPP:</p>
+            <pre><code>-- Array-style table
+local colors = {"red", "green", "blue"}
+print(colors[1])  -- red
+
+-- Dictionary-style table
+local person = {
+    name = "Alice",
+    age = 25,
+    city = "Wonderland"
+}
+print(person.name)  -- Alice
+print(person["age"])  -- 25
+
+-- Nested tables
+local company = {
+    name = "TechCorp",
+    employees = {
+        {name = "Alice", role = "Engineer"},
+        {name = "Bob", role = "Designer"}
+    }
+}
+print(company.employees[1].name)  -- Alice
+
+-- Adding to tables
+local list = {}
+list[1] = "first"
+list["key"] = "value"</code></pre>
+            
+            <h4>Basic Modular Structure</h4>
+            <p>Organize code using modules:</p>
+            <pre><code>-- mymodule.lpp
+local mymodule = {}
+
+function mymodule.hello()
+    print("Hello from module")
+endb
+
+function mymodule.add(a, b)
+    return a + b
+endb
+
+return mymodule</code></pre>
+            <pre><code>-- main.lpp
+local mymodule = require("mymodule")
+
+mymodule.hello()
+print(mymodule.add(5, 3))</code></pre>
+            
+            <h3>🌐 Standard Library</h3>
+            
+            <h4>HTTP Requests</h4>
+            <p>LPP provides a modern HTTP client with both simple and advanced APIs.</p>
+            
+            <p><strong>Simple GET:</strong></p>
+            <pre><code>local http = require("http")
+
+local res, err = http.get("https://example.com")
+
+if err then
+    print("Error:", err)
+else
+    print("Status:", res.status)
+    print("Body:", res.body)
+endb</code></pre>
+            
+            <p><strong>Simple POST:</strong></p>
+            <pre><code>local res, err = http.post("https://example.com/api", "key=value")
+
+if err then
+    print("Error:", err)
+else
+    print("Status:", res.status)
+    print("Body:", res.body)
+endb</code></pre>
+            
+            <p><strong>Unified Request API:</strong></p>
+            <pre><code>local res, err = http.request({
+    url = "https://example.com",
+    method = "GET",
+    headers = {
+        ["Content-Type"] = "application/json"
+    }
+})
+
+if err then
+    print("Error:", err)
+else
+    print("Status:", res.status)
+    print("Body:", res.body)
+endb</code></pre>
+            
+            <h4>File Handling</h4>
+            <p>LPP provides extended file operations:</p>
+            <pre><code>local file = require("file")
+
+-- Read file
+local content = file.read("path/to/file.txt")
+print(content)
+
+-- Write file
+file.write("path/to/file.txt", "Hello, World!")
+
+-- Check if file exists
+if file.exists("path/to/file.txt") then
+    print("File exists")
+endb</code></pre>
+            
+            <h4>OS Functions</h4>
+            <p>Enhanced operating system interaction:</p>
+            <pre><code>local os = require("os")
+
+-- Execute system command
+local result = os.execute("ls -la")
+
+-- Get environment variable
+local path = os.getenv("PATH")
+
+-- Get current directory
+local cwd = os.getcwd()</code></pre>
+        </div>
+
+        <div id="philosophy" class="section">
+            <h2>Design Philosophy</h2>
+            
+            <h3>Why LPP Exists</h3>
+            <p>LPP was created to address a common problem: Lua is an excellent scripting language with a proven track record, but it lacks modern networking and system utilities out of the box. Developers often find themselves building the same HTTP clients, file handlers, and OS tools repeatedly across projects.</p>
+            
+            <p>LPP solves this by providing these essential tools as part of the standard library, while maintaining Lua's core philosophy of simplicity and performance.</p>
+            
+            <h3>Why Lua Was Chosen as a Base</h3>
+            <ul>
+                <li><strong>Proven Stability:</strong> Lua has been battle-tested for decades in production environments</li>
+                <li><strong>Performance:</strong> One of the fastest scripting languages available</li>
+                <li><strong>Simplicity:</strong> Clean, minimal syntax that's easy to learn and teach</li>
+                <li><strong>Embeddable:</strong> Designed to be embedded in other applications</li>
+                <li><strong>Community:</strong> Large ecosystem of libraries and knowledge</li>
+            </ul>
+            
+            <h3>Why Minimal Syntax Changes</h3>
+            <p>LPP intentionally keeps syntax changes minimal. The <code>endb</code> keyword is the primary syntax addition, replacing <code>end</code> for better readability in nested structures. This change:</p>
+            <ul>
+                <li>Makes code more readable by explicitly marking "end of block"</li>
+                <li>Reduces cognitive load when scanning complex nested structures</li>
+                <li>Maintains compatibility with Lua's overall syntax philosophy</li>
+            </ul>
+            
+            <h3>Why Features Are Added via Libraries</h3>
+            <p>Instead of modifying the core virtual machine, LPP extends functionality through standard libraries:</p>
+            <ul>
+                <li><strong>Stability:</strong> Core VM remains unchanged, reducing bug surface</li>
+                <li><strong>Modularity:</strong> Features can be loaded only when needed</li>
+                <li><strong>Maintainability:</strong> Easier to update and debug individual libraries</li>
+                <li><strong>Compatibility:</strong> Maintains compatibility with Lua's ecosystem</li>
+            </ul>
+            
+            <h3>Stability and Simplicity Goals</h3>
+            <p>LPP prioritizes stability and simplicity over feature bloat:</p>
+            <ul>
+                <li>Each feature must solve a real, common problem</li>
+                <li>APIs should be intuitive and consistent</li>
+                <li>Documentation should be clear and comprehensive</li>
+                <li>Breaking changes should be avoided whenever possible</li>
+            </ul>
+        </div>
+
+        <div id="copyright" class="section">
+            <h2>Copyright / License</h2>
+            
+            <h3>Copyright</h3>
+            <p><strong>Author:</strong> Klinti Karaj</p>
+            <p><strong>Years:</strong> 2024–2025</p>
+            <p>LPP is based on Lua source code and extends it with additional functionality.</p>
+            
+            <h3>License</h3>
+            <p>LPP is distributed under the MIT License, similar to Lua:</p>
+            <pre><code>MIT License
+
+Copyright (c) 2024-2025 Klinti Karaj
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</code></pre>
+            
+            <h3>Acknowledgments</h3>
+            <p>LPP is built upon the excellent Lua programming language created by the Lua team at PUC-Rio. We acknowledge their foundational work in creating a lightweight, efficient, and elegant scripting language.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>LPP Documentation &copy; 2024-2025 funnyfreak228</p>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('nav button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Handle URL hash for direct linking
+        window.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                showSection(hash);
+                // Update button states
+                const buttons = document.querySelectorAll('nav button');
+                buttons.forEach(button => {
+                    button.classList.remove('active');
+                    if (button.getAttribute('onclick').includes(hash)) {
+                        button.classList.add('active');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

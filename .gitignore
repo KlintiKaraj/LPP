@@ -1,0 +1,37 @@
+# Object files
+*.o
+*.obj
+
+# Executables
+*.exe
+*.dll
+*.so
+*.dylib
+lpp
+lppac
+
+# Static libraries
+*.a
+*.lib
+
+# Compiled files
+src/*.o
+bin/*.exe
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+liblpp.a
+
+# Output files
+output.txt
+*.log
